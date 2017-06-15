@@ -23,7 +23,6 @@ PRODUCT_PACKAGES += \
 	A2dpSinkApp                             \
 	BleServerEmulator                       \
 	BleClient                               \
-	ethernet                                \
 	libfsl_wfd.so                           \
 	libfsl_wfd                           \
 	fsl.imx.jar                             \
@@ -85,7 +84,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	rtl_hostapd 				\
 	hostapd					\
-	hostapd_cli
+	hostapd_cli				\
+        rtw_fwloader 			\
+	wifi_adapter
 
 # keyboard mapping files.
 PRODUCT_PACKAGES += \
@@ -116,7 +117,6 @@ PRODUCT_PACKAGES += \
 	copybit.imx6				\
 	hwcomposer.imx6				\
 	camera.imx6				\
-	power.imx6				\
 	audio.r_submix.default			\
 	libbt-vendor				\
 	libbt-vendor-broadcom		\
@@ -362,7 +362,10 @@ PRODUCT_COPY_FILES +=	\
     device/fsl-proprietary/media-profile/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     device/fsl-proprietary/media-profile/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     device/fsl-proprietary/media-profile/media_profiles_720p.xml:system/etc/media_profiles_720p.xml \
-    
+
+PRODUCT_COPY_FILES +=  \
+       device/fsl/imx6/su:system/xbin/su \
+       device/fsl/imx6/su:system/xbin/daemonsu
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
