@@ -367,6 +367,10 @@ PRODUCT_COPY_FILES +=  \
        device/fsl/imx6/su:system/xbin/su \
        device/fsl/imx6/su:system/xbin/daemonsu
 
+PRODUCT_COPY_FILES +=  \
+       $(call find-copy-subdir-files,*.apk,$(LOCAL_PATH)/preinstallapk,system/preinstall) \
+       device/fsl/imx6/preinstall.sh:system/bin/preinstall.sh
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
