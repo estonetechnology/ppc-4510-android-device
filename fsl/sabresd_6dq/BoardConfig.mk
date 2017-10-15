@@ -45,35 +45,48 @@ TARGET_BOOTLOADER_BOARD_NAME := SABRESD
 PRODUCT_MODEL := 4510-VKI
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/fsl/imx6
-BOARD_WIFI_VENDOR := realtek
-ifeq ($(BOARD_WIFI_VENDOR), realtek)
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_rtl
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_rtl
-BOARD_WLAN_DEVICE := rtl8192cu
-#BOARD_WLAN_DEVICE := rtl8192du
-#BOARD_WLAN_DEVICE := rtl8192ce
-#BOARD_WLAN_DEVICE := rtl8192de
-#BOARD_WLAN_DEVICE := rtl8723as
-#BOARD_WLAN_DEVICE := rtl8723au
-#BOARD_WLAN_DEVICE := rtl8189es
-#BOARD_WLAN_DEVICE := rtl8723bs
-#BOARD_WLAN_DEVICE := rtl8723bu
-WIFI_DRIVER_MODULE_NAME := "wlan"
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_ARG := "ifname=wlan0 if2name=p2p0"
-WIFI_FIRMWARE_LOADER := "rtw_fwloader"
-WIFI_DRIVER_FW_PATH_STA := ""
-WIFI_DRIVER_FW_PATH_AP := ""
-WIFI_DRIVER_FW_PATH_P2P := ""
-WIFI_DRIVER_FW_PATH_PARAM := ""
+# UNITE is a virtual device.
+BOARD_WLAN_DEVICE            := UNITE
+BOARD_WLAN_VENDOR	     := BCMDHD
+WPA_SUPPLICANT_VERSION       := VER_0_8_UNITE
+
+BOARD_WPA_SUPPLICANT_DRIVER  := NL80211
+BOARD_HOSTAPD_DRIVER         := NL80211
+
+BOARD_HOSTAPD_PRIVATE_LIB_BCM               := lib_driver_cmd_bcmdhd
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB_BCM        := lib_driver_cmd_bcmdhd
+
+BOARD_SUPPORT_BCM_WIFI  := true
+#for intel vendor
+ifeq ($(BOARD_WLAN_VENDOR),INTEL)
+BOARD_HOSTAPD_PRIVATE_LIB                := private_lib_driver_cmd
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB         := private_lib_driver_cmd
+WPA_SUPPLICANT_VERSION                   := VER_0_8_X
+HOSTAPD_VERSION                          := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB         := private_lib_driver_cmd_intel
+WIFI_DRIVER_MODULE_PATH                  := "/system/lib/modules/iwlagn.ko"
+WIFI_DRIVER_MODULE_NAME                  := "iwlagn"
+WIFI_DRIVER_MODULE_PATH                  ?= auto
 endif
 
+ifeq ($(BOARD_WLAN_VENDOR),BCMDHD)
+WIFI_DRIVER_MODULE_NAME := "bcmdhd"
+#WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcmdhd.ko"
+#TARGET_KERNEL_MODULES := "/system/lib/modules/bcmdhd.ko"
+WIFI_DRIVER_MODULE_ARG:= "iface_name=wlan0 firmware_path=/system/etc/firmware/fw_bcm43438a1.bin nvram_path=/system/etc/firmware/config.txt"
+include hardware/broadcom/wlan/bcmdhd/firmware/ap6212/device-bcm.mk
+WIFI_DRIVER_FW_PATH_STA        := "/system/etc/firmware/fw_bcm43438a1.bin"
+WIFI_DRIVER_FW_PATH_P2P        := "/system/etc/firmware/fw_bcm43438a1_p2p.bin"
+WIFI_DRIVER_FW_PATH_AP         := "/system/etc/firmware/fw_bcm43438a1_apsta.bin"
+WIFI_DRIVER_FW_PATH_PARAM      := "/system/etc/firmware/config.txt"
+#WIFI_DRIVER_FW_PATH_STA        := "/system/etc/firmware/bcm/fw_bcmdhd.bin"
+#WIFI_DRIVER_FW_PATH_P2P        := "/system/etc/firmware/bcm/fw_bcmdhd.bin"
+#WIFI_DRIVER_FW_PATH_AP         := "/system/etc/firmware/bcm/fw_bcmdhd_apsta.bin"
+#WIFI_DRIVER_FW_PATH_PARAM      := "/sys/module/bcmdhd/parameters/firmware_path"
 
-TARGET_KERNEL_MODULES += \
-	kernel_imx/drivers/net/wireless/rtl8188EUS/8188eu.ko:system/lib/modules/8188eu.ko
+#TARGET_KERNEL_MODULES        := \
+#                                kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:system/lib/modules/bcmdhd.ko
+endif
 
 BOARD_MODEM_VENDOR := AMAZON
 
@@ -93,7 +106,6 @@ DM_VERITY_RUNTIME_CONFIG := true
 # uncomment below lins if use NAND
 #TARGET_USERIMAGES_USE_UBIFS = true
 HAVE_FSL_IMX_CODEC :=true
-
 
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 UBI_ROOT_INI := device/fsl/sabresd_6dq/ubi/ubinize.ini
@@ -117,7 +129,7 @@ endif
 
 
 # Broadcom BCM4339 BT
-#BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/fsl/sabresd_6dq/bluetooth
 
 USE_ION_ALLOCATOR := false
