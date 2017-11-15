@@ -15,10 +15,8 @@ PRODUCT_PACKAGES += \
 	SoundRecorder				\
 	Camera					\
         LegacyCamera                            \
-	Email					\
 	FSLOta					\
 	CactusPlayer                            \
-	WfdSink                                 \
 	wfd                                     \
 	A2dpSinkApp                             \
 	BleServerEmulator                       \
@@ -32,7 +30,6 @@ PRODUCT_PACKAGES += \
 	libstagefright_hdcp                  \
 	hwcomposer_fsl.imx6.so                  \
 	hwcomposer_fsl.imx6                  \
-	VideoEditor				\
 	FSLProfileApp				\
 	FSLProfileService			\
 	VisualizationWallpapers			\
