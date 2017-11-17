@@ -18,9 +18,6 @@ PRODUCT_PACKAGES += \
 	FSLOta					\
 	CactusPlayer                            \
 	wfd                                     \
-	A2dpSinkApp                             \
-	BleServerEmulator                       \
-	BleClient                               \
 	libfsl_wfd.so                           \
 	libfsl_wfd                           \
 	fsl.imx.jar                             \
