@@ -58,9 +58,9 @@ PRODUCT_PACKAGES += freescale-extended 		\
 		    freescale-extended.xml
 
 # Broadcom firmwares
-#PRODUCT_PACKAGES += \
-#	Type_ZP.hcd   	\
-#	bt_vendor.conf	\
+PRODUCT_PACKAGES += \
+	Type_ZP.hcd   	\
+	bt_vendor.conf	
 #	bcmdhd.cal		\
 #	fw_bcmdhd.bin	\
 #	fw_bcmdhd_apsta.bin

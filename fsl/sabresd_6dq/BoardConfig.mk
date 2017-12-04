@@ -130,6 +130,7 @@ endif
 
 # Broadcom BCM4339 BT
 BOARD_HAVE_BLUETOOTH_BCM := true
+USE_BLUETOOTH_BCM4343 := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/fsl/sabresd_6dq/bluetooth
 
 USE_ION_ALLOCATOR := false

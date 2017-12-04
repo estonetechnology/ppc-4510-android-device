@@ -2,6 +2,7 @@
 #/dev/ttymxc2              0660   bluetooth  net_bt_stack
 #/dev/ttymxc4              0660   bluetooth  net_bt_stack
 /dev/ttymxc*              0666   root       root
+/dev/ttymxc4              0660   bluetooth  net_bt_stack
 /dev/snd/*                0660   system     audio
 /dev/ttyUSB*              0666   root       root
 /dev/ttyACM*              0640   radio      radio
