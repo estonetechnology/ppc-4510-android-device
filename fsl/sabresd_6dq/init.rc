@@ -96,7 +96,8 @@ on boot
     setprop ro.adb.secure 1
 
     # Set rotation to 270 to cofigure as portrait mode
-    setprop ro.sf.hwrotation 0
+    #setprop ro.sf.hwrotation 0
+    setprop ro.sf.hwrotation 90
 
     # Set the density to 160dpi, default 128dpi is not good
     setprop ro.sf.lcd_density 160
