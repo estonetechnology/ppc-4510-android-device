@@ -5,6 +5,9 @@ on early-init
     # mount the debugfs
     mount debugfs none /sys/kernel/debug/ mode=0755
 
+    //#add ben
+    //write /sys/class/backlight/backlight.0/brightness  0
+	
 on init
     start watchdogd
 
@@ -21,6 +24,8 @@ on init
     export COMPONENT_REGISTER_FILE /system/etc/component_register
     export CONTENTPIPE_REGISTER_FILE /system/etc/contentpipe_register
     
+    #add ben
+    write /sys/class/backlight/backlight.0/brightness  0
 
     # disable cursor blink for fbcon, if no splash screen support
     write /sys/class/graphics/fbcon/cursor_blink 0
