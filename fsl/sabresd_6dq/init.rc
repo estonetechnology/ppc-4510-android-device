@@ -37,6 +37,7 @@ on boot
 
     # emmulate battery property
     setprop sys.emulated.battery 1
+    setprop service.adb.tcp.port 5555
 
     # Set permission for IIM node
     symlink /dev/mxs_viim /dev/mxc_mem
